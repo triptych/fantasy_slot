@@ -296,16 +296,28 @@ class FantasySlotGame {
         this.updateUI();
         this.addLogEntry(`🎰 Spinning with ${this.currentBet} gold bet...`);
 
-        // Animate reels
-        this.animateReels();
+        // Pre-determine the final result before animation
+        const finalResults = this.generateFinalResults();
 
-        // Generate results after animation
+        // Animate reels with predetermined results
+        this.animateReels(finalResults);
+
+        // Process results after animation completes
         setTimeout(() => {
-            this.generateSpinResult();
+            this.processSpinResult(finalResults);
         }, 2000);
     }
 
-    animateReels() {
+    generateFinalResults() {
+        const results = [];
+        // Generate final symbols for each reel
+        for (let i = 0; i < 3; i++) {
+            results.push(this.getRandomSymbol());
+        }
+        return results;
+    }
+
+    animateReels(finalResults) {
         const reels = document.querySelectorAll('.reel');
 
         reels.forEach((reel, index) => {
@@ -317,26 +329,18 @@ class FantasySlotGame {
                 reel.querySelector('.symbol').textContent = randomSymbol.emoji;
             }, 100);
 
-            // Stop spinning after delay
+            // Stop spinning after delay and set final symbol
             setTimeout(() => {
                 clearInterval(spinInterval);
                 reel.classList.remove('spinning');
+                // Set the predetermined final symbol
+                reel.querySelector('.symbol').textContent = finalResults[index].emoji;
             }, 1500 + (index * 200));
         });
     }
 
-    generateSpinResult() {
-        const reels = document.querySelectorAll('.reel');
-        const results = [];
-
-        // Generate final symbols for each reel
-        reels.forEach(reel => {
-            const symbol = this.getRandomSymbol();
-            reel.querySelector('.symbol').textContent = symbol.emoji;
-            results.push(symbol);
-        });
-
-        // Check for wins
+    processSpinResult(results) {
+        // Check for wins using the predetermined results
         const winResult = this.checkWin(results);
 
         if (winResult.isWin) {
