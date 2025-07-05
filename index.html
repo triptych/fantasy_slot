@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🏰 Fantasy Slot Quest 🏰</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://js.puter.com/v2/"></script>
+    </head>
+    <body>
+        <div class="game-container">
+            <!-- Header -->
+            <header class="game-header">
+                <h1>🏰 Fantasy Slot Quest 🏰</h1>
+                <div class="user-info">
+                    <div id="auth-section">
+                        <button id="login-btn" class="btn btn-primary">🔐 Login to Save Progress</button>
+                        <div id="user-display" class="hidden">
+                            <span id="username">👤 Guest</span>
+                            <button id="logout-btn" class="btn btn-secondary">🚪 Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Game Stats -->
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">💰 Gold</span>
+                    <span id="gold-amount" class="stat-value">1000</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🏆 High Score</span>
+                    <span id="high-score" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">⚔️ Level</span>
+                    <span id="player-level" class="stat-value">1</span>
+                </div>
+            </div>
+
+            <!-- Slot Machine -->
+            <div class="slot-machine">
+                <div class="slot-machine-frame">
+                    <div class="slot-reels">
+                        <div class="reel" id="reel1">
+                            <div class="symbol">🐉</div>
+                            <div class="symbol">⚔️</div>
+                            <div class="symbol">🏰</div>
+                        </div>
+                        <div class="reel" id="reel2">
+                            <div class="symbol">🧙‍♂️</div>
+                            <div class="symbol">💎</div>
+                            <div class="symbol">🛡️</div>
+                        </div>
+                        <div class="reel" id="reel3">
+                            <div class="symbol">🗡️</div>
+                            <div class="symbol">🔮</div>
+                            <div class="symbol">👑</div>
+                        </div>
+                    </div>
+                    <div class="payline"></div>
+                </div>
+
+                <!-- Bet Controls -->
+                <div class="bet-controls">
+                    <div class="bet-section">
+                        <label for="bet-amount">💰 Bet Amount:</label>
+                        <select id="bet-amount">
+                            <option value="10">10 Gold</option>
+                            <option value="25" selected="selected">25 Gold</option>
+                            <option value="50">50 Gold</option>
+                            <option value="100">100 Gold</option>
+                            <option value="250">250 Gold</option>
+                        </select>
+                    </div>
+                    <button id="spin-btn" class="btn btn-spin">🎰 SPIN THE REELS! 🎰</button>
+                    <button id="max-bet-btn" class="btn btn-max">⚡ MAX BET ⚡</button>
+                </div>
+            </div>
+
+            <!-- Win Display -->
+            <div id="win-display" class="win-display hidden">
+                <div class="win-content">
+                    <h2 id="win-title">🎉 VICTORY! 🎉</h2>
+                    <p id="win-message">You won
+                        <span id="win-amount">0</span>
+                        gold!</p>
+                    <div id="win-combo" class="win-combo"></div>
+                </div>
+            </div>
+
+            <!-- Paytable -->
+            <div class="paytable">
+                <h3>🏆 Paytable 🏆</h3>
+                <div class="paytable-grid">
+                    <div class="pay-row">
+                        <span class="combo">🐉🐉🐉</span>
+                        <span class="payout">1000x</span>
+                        <span class="name">Dragon's Hoard</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">👑👑👑</span>
+                        <span class="payout">500x</span>
+                        <span class="name">Royal Crown</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">🧙‍♂️🧙‍♂️🧙‍♂️</span>
+                        <span class="payout">250x</span>
+                        <span class="name">Wizard's Power</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">💎💎💎</span>
+                        <span class="payout">200x</span>
+                        <span class="name">Precious Gems</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">🔮🔮🔮</span>
+                        <span class="payout">150x</span>
+                        <span class="name">Crystal Ball</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">⚔️⚔️⚔️</span>
+                        <span class="payout">100x</span>
+                        <span class="name">Warrior's Blade</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">🏰🏰🏰</span>
+                        <span class="payout">75x</span>
+                        <span class="name">Castle Keep</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">🛡️🛡️🛡️</span>
+                        <span class="payout">50x</span>
+                        <span class="name">Shield Wall</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="combo">🗡️🗡️🗡️</span>
+                        <span class="payout">25x</span>
+                        <span class="name">Sword Strike</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievement System -->
+            <div class="achievements">
+                <h3>🏅 Achievements 🏅</h3>
+                <div id="achievements-list" class="achievements-list">
+                    <!-- Achievements will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Game Log -->
+            <div class="game-log">
+                <h3>📜 Adventure Log 📜</h3>
+                <div id="log-content" class="log-content">
+                    <p>🌟 Welcome to Fantasy Slot Quest! Your adventure begins...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="spinner">⚡</div>
+                <p>Loading your quest...</p>
+            </div>
+        </div>
+
+        <!-- Audio Elements -->
+        <audio id="spin-sound" preload="auto">
+            <source 
